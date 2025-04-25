@@ -1,5 +1,6 @@
 package pkTree;
 
+import java.util.*;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,15 +10,8 @@ import java.util.Scanner;
 
 public class FileIO {
 
-    public static void main(String[] args) {
-        String path = "/Users/prajanmalla/InteeliJ Projects/final-project/src/pkTree/ entities_hierarchy.txt";
 
-
-        readFile(path);
-
-    }
-
-    public static void readFile(String path) {
+    public static void readFile(String path,Tree tree) {
         BufferedReader reader;
 
         try {
@@ -25,8 +19,17 @@ public class FileIO {
             String line = reader.readLine();
 
             while (line != null) { // we keep looping until we reach the last line
-                System.out.println(line);
-                System.out.println("--"); // separator line
+
+                if (line.contains(":")) {
+                    String[] parts = line.split(":");
+                    String parent = parts[0].trim();
+                    String[] children = parts[1].split(",");
+
+                    for (int i=0;i<(children.length);i++) {
+                        insertTreeData(parent, children[i].trim(),tree);
+                    }
+                }
+
                 line = reader.readLine(); 		    // read next line
             }
 
@@ -35,6 +38,10 @@ public class FileIO {
             e.printStackTrace();
         }
 
+    }
+
+    public static void insertTreeData(String parent, String child,Tree tree){
+        tree.insert(parent,child);
     }
 
     // insert the tree funtion

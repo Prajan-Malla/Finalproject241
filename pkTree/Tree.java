@@ -32,9 +32,11 @@ public class Tree<T> {
     public boolean isEmpty() { return ctPositions_ == 0; }
 
 
-
-    public boolean inertNode(T parentData, T newData) {
-
+    public boolean insert(T parentData, T newData) {     // don't use boolean if u can
+        if(ctPositions_==0){
+            Position<T> newNode=new Position<>(newData,null);
+            setRoot(newNode);
+        }
         // Ensure newData is not already in the tree
         // we start with the root of the whole tree
         if (search(root_, newData) != null) {
