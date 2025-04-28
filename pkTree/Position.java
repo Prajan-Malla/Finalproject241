@@ -71,10 +71,9 @@ public class Position<T> {
         return removed;
     }
 
-    // Getter for the child count
-    public int getCtchildren() {
-        return ctChildren_;
-    }
+
+
+
 
     boolean isRoot(Position<T> p) {
         return p.parent_==null;
@@ -87,4 +86,6 @@ public class Position<T> {
     boolean isExternal(Position<T> p){  return p.ctChildren_==0;  }
 
     int getNbChildren(Position<T>p){return ctChildren_;}
+
+
 }

@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class FileIO {
 
 
-    public static void readFile(String path,Tree tree) {
+    public static void readFile(String path,Tree<String>tree) {
         BufferedReader reader;
 
         try {
@@ -26,7 +26,8 @@ public class FileIO {
                     String[] children = parts[1].split(",");
 
                     for (int i=0;i<(children.length);i++) {
-                        insertTreeData(parent, children[i].trim(),tree);
+                        String childrenTrimed=children[i].trim();
+                        insertTreeData(parent.toLowerCase(), childrenTrimed.toLowerCase(),tree);
                     }
                 }
 
@@ -40,7 +41,7 @@ public class FileIO {
 
     }
 
-    public static void insertTreeData(String parent, String child,Tree tree){
+    public static void insertTreeData(String parent, String child,Tree<String> tree){
         tree.insert(parent,child);
     }
 

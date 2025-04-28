@@ -1,5 +1,5 @@
 Entity: inert entity, living being
-Inert entity: natural object, artefact
+inert entity: natural object, artefact
 Artefact: car, flight, ship, train, metro, tank, gun, pen, textile, aquarium, terrarium, pot
 car: van, limousine, truck, hatchback, city car, roadster
 limousine: tank limo, hummer limo, Jacuzzi Limo, classic limo
