@@ -10,64 +10,65 @@ import java.util.Scanner;
 
 public class FileIO {
 
-
-    public static void readFile(String path,Tree<String>tree) {
+    // Reads a file and builds a tree from its contents
+    public static void readFile(String path, Tree<String> tree) {
         BufferedReader reader;
 
         try {
             reader = new BufferedReader(new FileReader(path));
             String line = reader.readLine();
 
-            while (line != null) { // we keep looping until we reach the last line
+            // Loop through each line of the file
+            while (line != null) {
 
+                // Check for valid line format
                 if (line.contains(":")) {
                     String[] parts = line.split(":");
                     String parent = parts[0].trim();
                     String[] children = parts[1].split(",");
 
-                    for (int i=0;i<(children.length);i++) {
-                        String childrenTrimed=children[i].trim();
-                        insertTreeData(parent.toLowerCase(), childrenTrimed.toLowerCase(),tree);
+                    // Insert each child into the tree
+                    for (int i = 0; i < children.length; i++) {
+                        String childrenTrimed = children[i].trim();
+                        insertTreeData(parent.toLowerCase(), childrenTrimed.toLowerCase(), tree);
                     }
                 }
 
-                line = reader.readLine(); 		    // read next line
+                line = reader.readLine(); // Move to next line
             }
 
-            reader.close();
+            reader.close(); // Close the reader
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Handle errors
         }
-
     }
 
-    public static void insertTreeData(String parent, String child,Tree<String> tree){
-        tree.insert(parent,child);
+    // Helper method to insert parent-child relationship into the tree
+    public static void insertTreeData(String parent, String child, Tree<String> tree) {
+        tree.insert(parent, child);
     }
 
-    // insert the tree funtion
-/*
-   public static void writeFile(String path) {
+    /*
+    // Method to write user input to a file (currently commented out)
+    public static void writeFile(String path) {
         System.out.println("begg of writing.");
         String inputUser;
         try {
             FileWriter myWriter = new FileWriter(path);
-
             Scanner scanner = new Scanner(System.in);
 
             System.out.println("New line?");
+            inputUser = scanner.nextLine(); // Get user input
+            myWriter.write(inputUser);      // Write to file
 
-            inputUser = scanner.nextLine();
-            myWriter.write(inputUser);
-
-            scanner.close(); // Close the scanner when finished
-            myWriter.close();
+            scanner.close(); // Close scanner
+            myWriter.close(); // Close writer
             System.out.println("End of writing.");
         } catch (IOException e) {
             System.out.println("Error--------------");
-            e.printStackTrace();
+            e.printStackTrace(); // Handle errors
         }
-    }*/
+    }
+    */
 
 }
-

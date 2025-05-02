@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String path = "/Users/prajanmalla/InteeliJ Projects/final-project/src/pkTree/ entities_hierarchy.txt";
+        String path = "C:\\Users\\mallap894\\IdeaProjects\\Finalproject241\\pkTree\\ entities_hierarchy.txt";
         Tree<String> treeMain = new Tree<>();
         String stopper = "end";  // Initialize stopper to control loop exit
         int lopper = 0;  // To store the choice for which game to play
