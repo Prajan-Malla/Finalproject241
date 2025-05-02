@@ -13,6 +13,7 @@ public class Game1 {
      * If the guess is correct, it moves to the first child; otherwise, checks siblings or backtracks.
      */
     public static void startGame1Easy(Tree<String> treeMain) {
+
         Scanner scanner = new Scanner(System.in);
         Position<String> current = treeMain.getRoot(); // Start at root of the tree
 

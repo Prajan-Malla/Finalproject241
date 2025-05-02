@@ -11,6 +11,7 @@ public class Game2 {
      * The game continues until 5 questions can be asked, and the user responds with true/false answers.
      */
     public static void startGame2(Tree<String> treeMain) {
+
         LinkedList<Position<String>> possibleQuestion = new LinkedList<>(); // List to hold the nodes for questioning
         Random random = new Random(); // Randomizer to choose child nodes
         Position<String> node = treeMain.getRoot(); // Start from the root of the tree
