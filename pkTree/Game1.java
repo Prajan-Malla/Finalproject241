@@ -10,18 +10,25 @@ public class Game1 {
     public static void startGame1Easy(Tree<String> treeMain) {
         Scanner scanner = new Scanner(System.in);
         Position<String> current = treeMain.getRoot();
+        int iterations = 0;
 
-        while (current != null) {
+        System.out.println("Think of an item, and I will try to guess it!");
+        System.out.print("Please enter your guess: ");
+        String userGuessed = scanner.nextLine(); // Capture user's guess
+
+        while (iterations < 6 && current != null) {
             System.out.println("Is it a " + current.getData() + "? (true/false)");
             boolean answer = scanner.nextBoolean();
+            iterations++;
 
             if (answer) {
-                if (current.getChildren().isEmpty()) {
+                if (current.getData().equalsIgnoreCase(userGuessed)) {
                     System.out.println("System has guessed your thought!");
                     return;
+                } else if (!current.getChildren().isEmpty()) {
+                    current = current.getChildren().get(0); // Go to first child
                 } else {
-                    // Go to first child
-                    current = current.getChildren().get(0);
+                    break; // No children to go deeper
                 }
             } else {
                 Position<String> parent = current.getParent();
@@ -33,14 +40,14 @@ public class Game1 {
                 List<Position<String>> siblings = parent.getChildren();
                 int index = siblings.indexOf(current);
                 if (index + 1 < siblings.size()) {
-                    current = siblings.get(index + 1); // next sibling
+                    current = siblings.get(index + 1); // Try next sibling
                 } else {
-                    // No more siblings — backtrack up the tree
+                    // Backtrack up the tree to find next available sibling
                     while (parent != null) {
                         Position<String> grandParent = parent.getParent();
                         if (grandParent == null) {
-                            System.out.println("System failed. No more options.");
-                            return;
+                            current = null;
+                            break;
                         }
 
                         List<Position<String>> parentSiblings = grandParent.getChildren();
@@ -56,13 +63,24 @@ public class Game1 {
             }
         }
 
-        System.out.println("System failed.");
+        // Final check after 6 questions
+        if (current != null && current.getData().equalsIgnoreCase(userGuessed)) {
+            System.out.println("System has guessed your thought!");
+        } else {
+            System.out.println("System failed to guess your thought.");
+            System.out.println("You thought of: " + userGuessed);
+        }
     }
+
 
     public static void startGame1Hard(Tree<String> treeMain) {
         Scanner scanner = new Scanner(System.in);
         String currentFocus = "inert entity"; // Start with correct case
         int iterations = 0;
+
+        System.out.println("Think of an item, and I will try to guess it!");
+        System.out.print("Please enter your guess: ");
+        String userGuessed = scanner.nextLine(); // Capture user's guess
 
 
         while (iterations < 6 && currentFocus != null) {
@@ -132,14 +150,14 @@ public class Game1 {
 
         System.out.println("Is it a " + currentFocus + "? (true/false)");
         boolean answer = scanner.nextBoolean();
-        if(answer){
+        if(answer&&userGuessed.equals(currentFocus)){
             System.out.println("System has guessed your thought");
         }
         else{
             System.out.println("System failed");
         }
 
-        scanner.close();
+
     }
 
     public static String maxChildren(Tree<String> treeMain, String parentData) {
