@@ -51,7 +51,7 @@ public class Game2 {
                 break;
             } else {
                 // If not, the tree isn't deep enough — retry
-                System.out.println("Tree is not deep enough for 5 questions. Retrying...");
+                //System.out.println("Tree is not deep enough for 5 questions. Retrying...");
             }
         }
 
