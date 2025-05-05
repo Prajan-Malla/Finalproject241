@@ -9,19 +9,28 @@ public class Game1 {
 
     public static void startGame1Easy(Tree<String> treeMain) {
         Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the entity you are thinking of:");
+        String userGuessed = scanner.nextLine().trim();
+
         Position<String> current = treeMain.getRoot();
 
         while (current != null) {
             System.out.println("Is it a " + current.getData() + "? (true/false)");
-            boolean answer = scanner.nextBoolean();
+            String input = scanner.nextLine().trim().toLowerCase();
+            boolean answer = input.equals("true");
+
+            if (current.getData().equalsIgnoreCase(userGuessed) && answer) {
+                System.out.println("System has guessed your thought!");
+                return;
+            }
 
             if (answer) {
                 if (current.getChildren().isEmpty()) {
-                    System.out.println("System has guessed your thought!");
+                    System.out.println("System guessed wrong or no further options.");
                     return;
                 } else {
-                    // Go to first child
-                    current = current.getChildren().get(0);
+                    current = current.getChildren().get(0); // go to first child
                 }
             } else {
                 Position<String> parent = current.getParent();
@@ -59,11 +68,14 @@ public class Game1 {
         System.out.println("System failed.");
     }
 
+
     public static void startGame1Hard(Tree<String> treeMain) {
         Scanner scanner = new Scanner(System.in);
         String currentFocus = "inert entity"; // Start with correct case
         int iterations = 0;
 
+        System.out.println("Enter your guess element in the tree");
+        String userGuessed = scanner.nextLine();
 
         while (iterations < 6 && currentFocus != null) {
             Position<String> currentNode = treeMain.search(treeMain.getRoot(), currentFocus);
@@ -132,14 +144,12 @@ public class Game1 {
 
         System.out.println("Is it a " + currentFocus + "? (true/false)");
         boolean answer = scanner.nextBoolean();
-        if(answer){
-            System.out.println("System has guessed your thought");
-        }
-        else{
-            System.out.println("System failed");
+        if (currentFocus.equals(userGuessed) && answer) {
+            System.out.println("System has guessed your thought!");
+        } else {
+            System.out.println("System failed.");
         }
 
-        scanner.close();
     }
 
     public static String maxChildren(Tree<String> treeMain, String parentData) {

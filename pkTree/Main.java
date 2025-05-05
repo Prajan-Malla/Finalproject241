@@ -6,11 +6,11 @@ public class Main {
     public static void main(String[] args) {
         String path = "/Users/prajanmalla/InteeliJ Projects/final-project/src/pkTree/ entities_hierarchy.txt";
         Tree<String> treeMain = new Tree<>();
-        String stopper = "end";  // Initialize stopper to control loop exit
+        String stopper = "";  // Initialize stopper to control loop exit
         int lopper = 0;  // To store the choice for which game to play
         Scanner scanner = new Scanner(System.in);
 
-        while (stopper.equals("end")) {  // Use equals() to compare strings
+        while (!stopper.equals("end")) {  // Use equals() to compare strings
             // Read the file and build the tree
             FileIO.readFile(path, treeMain);
             treeMain.displayTree();  // Display the tree
@@ -39,7 +39,7 @@ public class Main {
             }
 
             // Ask the user if they want to play again
-            System.out.println("Do you want to play again? Type 'end' to play again or any other key to exit.");
+            System.out.println("Do you want to play again? Type 'end' to exit or any other key to play again.");
             stopper = scanner.next();  // Take user input to decide whether to continue or stop
         }
 
